@@ -1,0 +1,94 @@
+{
+  "schema": {
+    "settings": {
+      "__type__": "collection",
+      "global": {
+        "__type__": "document",
+        "heroHeadline": "string",
+        "heroSubheadline": "string",
+        "contactPhone": "string",
+        "contactEmail": "string",
+        "whatsappMessage": "string",
+        "aboutText": "string",
+        "seoTitle": "string",
+        "seoDescription": "string",
+        "heroImage": "string",
+        "aboutPageImage": "string",
+        "bgPatternUrl": "string"
+      }
+    },
+    "leads": {
+      "__type__": "collection",
+      "example_lead": {
+        "__type__": "document",
+        "name": "string",
+        "phone": "string",
+        "email": "string",
+        "service": "string",
+        "date": "string",
+        "message": "string",
+        "status": "string",
+        "createdAt": "timestamp"
+      }
+    },
+    "treatments": {
+      "__type__": "collection",
+      "example_treatment": {
+        "__type__": "document",
+        "title": "string",
+        "slug": "string",
+        "summary": "string",
+        "content": "string"
+      }
+    },
+    "blogs": {
+      "__type__": "collection",
+      "example_blog": {
+        "__type__": "document",
+        "title": "string",
+        "slug": "string",
+        "category": "string",
+        "excerpt": "string",
+        "content": "string",
+        "status": "string"
+      }
+    },
+    "testimonials": {
+      "__type__": "collection",
+      "example_testimonial": {
+        "__type__": "document",
+        "name": "string",
+        "rating": "number",
+        "treatment": "string",
+        "text": "string",
+        "date": "string",
+        "status": "string"
+      }
+    },
+    "faqs": {
+      "__type__": "collection",
+      "example_faq": {
+        "__type__": "document",
+        "question": "string",
+        "answer": "string"
+      }
+    },
+    "gallery": {
+      "__type__": "collection",
+      "example_gallery": {
+        "__type__": "document",
+        "url": "string",
+        "alt": "string"
+      }
+    }
+  },
+  "securityRules": {
+    "settings": "Public read, authenticated write.",
+    "leads": "Public create, authenticated read/write.",
+    "treatments": "Public read, authenticated write.",
+    "blogs": "Public read, authenticated write.",
+    "testimonials": "Public read, authenticated write.",
+    "faqs": "Public read, authenticated write.",
+    "gallery": "Public read, authenticated write."
+  }
+}
