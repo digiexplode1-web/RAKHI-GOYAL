@@ -6,10 +6,32 @@ import OvulationCalculator from "../../components/OvulationCalculator";
 import SuccessRateEstimator from "../../components/SuccessRateEstimator";
 import { useLanguage } from "../../contexts/LanguageContext";
 
+const defaultSettings = {
+  heroHeadline1: "EXPERT",
+  heroHeadline2: "FERTILITY CARE",
+  heroSubheadline: "Consult Dr. Rakhi Goyal, Fertility & IVF Specialist with 23+ years of experience and 4500+ IVF cycles.",
+  contactPhone: "78148 83261",
+  whatsappMessage: "Hello Dr. Rakhi Goyal team, I want to book a fertility consultation.",
+  aboutText: "Dr. Rakhi Goyal is a Fertility & IVF Specialist with 23+ years of experience in reproductive medicine and gynecology.",
+  doctorName: "Dr. Rakhi Goyal",
+  doctorDegrees: "MBBS, MD, FNB, FICOG",
+  ctaPrimaryText: "Book Consultation",
+  ctaSecondaryText: "Call Now",
+  heroBadge1Title: "23+ Years",
+  heroBadge1Subtitle: "Experience",
+  heroBadge2Title: "4500+",
+  heroBadge2Subtitle: "IVF Cycles",
+  whyChooseUsTitle: "Why Choose Us",
+  whyChooseUsSubtitle: "Precision & Care",
+  knowledgeBaseTitle: "Fertility Guidance",
+  knowledgeBaseSubtitle: "Knowledge Base"
+};
+
 export default function Home() {
   const data = useOutletContext<any>();
   const { t } = useLanguage();
-  if (!data) return <div className="min-h-screen bg-brand-ivory flex items-center justify-center">Loading...</div>;
+  
+  const settings = { ...defaultSettings, ...(data?.settings || {}) };
 
   return (
     <div className="pt-24 md:pt-32 relative overflow-hidden">
@@ -39,24 +61,24 @@ export default function Home() {
             
             <div className="relative mb-6">
               <h1 className="display-type text-[100px] sm:text-[120px] md:text-[140px] lg:text-[150px] xl:text-[180px] text-brand-plum leading-[0.75] drop-shadow-xl relative z-10 break-words -mb-2">
-                {data.settings.heroHeadline1 || "EXPERT"}
+                {settings.heroHeadline1 || "EXPERT"}
               </h1>
               <h2 className="sub-display text-[45px] sm:text-[50px] md:text-[60px] lg:text-[65px] xl:text-[75px] text-brand-rose/90 pt-0 relative z-10 leading-[0.8]">
-                {data.settings.heroHeadline2 || "FERTILITY CARE"}
+                {settings.heroHeadline2 || "FERTILITY CARE"}
               </h2>
             </div>
 
             <p className="text-sm font-medium text-brand-plum/80 mb-6 leading-relaxed max-w-[320px]">
-              {data.settings.heroSubheadline || "A study in precision and compassionate guidance."}
+              {settings.heroSubheadline || "A study in precision and compassionate guidance."}
             </p>
             
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <Link to="/contact" className="px-8 py-5 bg-gradient-to-r from-brand-rose to-brand-plum text-white transition-all duration-300 hover:shadow-2xl hover:shadow-brand-rose/30 hover:-translate-y-1 text-[10px] uppercase tracking-[0.3em] font-semibold flex items-center justify-center rounded-[2rem]">
-                {data.settings.ctaPrimaryText || "Book Consultation"}
+                {settings.ctaPrimaryText || "Book Consultation"}
               </Link>
-              <a href={`tel:${data.settings.contactPhone?.replace(/\s/g, '') || "7814883261"}`} className="px-8 py-5 bg-white border border-brand-rose/20 hover:border-brand-rose hover:bg-brand-rose/5 transition-all duration-300 text-brand-plum text-[10px] uppercase tracking-[0.3em] font-semibold flex items-center justify-center rounded-[2rem] shadow-sm hover:shadow-md">
+              <a href={`tel:${settings.contactPhone?.replace(/\s/g, '') || "7814883261"}`} className="px-8 py-5 bg-white border border-brand-rose/20 hover:border-brand-rose hover:bg-brand-rose/5 transition-all duration-300 text-brand-plum text-[10px] uppercase tracking-[0.3em] font-semibold flex items-center justify-center rounded-[2rem] shadow-sm hover:shadow-md">
                 <Phone className="w-4 h-4 mr-2 text-brand-rose" />
-                {data.settings.ctaSecondaryText || "Call Now"}
+                {settings.ctaSecondaryText || "Call Now"}
               </a>
             </div>
           </motion.div>
@@ -72,13 +94,13 @@ export default function Home() {
                 {/* Backgrounds wrapper to apply overflow hidden without clipping badges */}
                 <div className="absolute inset-0 overflow-hidden rounded-[3rem] z-0">
                   <div className="absolute inset-0 bg-gradient-to-b from-brand-blush/30 to-brand-peach/80 z-0"></div>
-                  {data.settings.heroImage && (
-                    <div className="absolute inset-0 z-0" style={{ backgroundImage: `url(${data.settings.heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+                  {settings.heroImage && (
+                    <div className="absolute inset-0 z-0" style={{ backgroundImage: `url(${settings.heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
                   )}
                 </div>
                 
                 {/* Simulated Doctor Image Area */}
-                {!data.settings.heroImage && (
+                {!settings.heroImage && (
                   <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-8 z-10 rounded-[2.5rem] overflow-hidden bg-brand-ivory/40 backdrop-blur-sm pointer-events-none">
                      <div className="absolute inset-0 bg-gradient-to-t from-brand-plum/20 to-transparent"></div>
                      <div className="w-24 h-24 rounded-full bg-brand-rose/10 flex items-center justify-center mb-6 shadow-xl shadow-brand-rose/10 border border-white relative">
@@ -97,8 +119,8 @@ export default function Home() {
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="font-heading tracking-widest text-brand-plum text-sm uppercase">{data.settings.heroBadge1Title || "23+ Years"}</p>
-                    <p className="text-[10px] text-brand-plum/60 font-semibold tracking-widest uppercase">{data.settings.heroBadge1Subtitle || "Experience"}</p>
+                    <p className="font-heading tracking-widest text-brand-plum text-sm uppercase">{settings.heroBadge1Title || "23+ Years"}</p>
+                    <p className="text-[10px] text-brand-plum/60 font-semibold tracking-widest uppercase">{settings.heroBadge1Subtitle || "Experience"}</p>
                   </div>
                 </div>
                 
@@ -107,8 +129,8 @@ export default function Home() {
                     <Heart className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="font-heading tracking-widest text-brand-plum text-sm uppercase">{data.settings.heroBadge2Title || "4500+"}</p>
-                    <p className="text-[10px] text-brand-plum/60 font-semibold tracking-widest uppercase">{data.settings.heroBadge2Subtitle || "IVF Cycles"}</p>
+                    <p className="font-heading tracking-widest text-brand-plum text-sm uppercase">{settings.heroBadge2Title || "4500+"}</p>
+                    <p className="text-[10px] text-brand-plum/60 font-semibold tracking-widest uppercase">{settings.heroBadge2Subtitle || "IVF Cycles"}</p>
                   </div>
                 </div>
              </div>
@@ -162,8 +184,8 @@ export default function Home() {
             <div className="lg:col-span-5 relative">
               <div className="w-full aspect-[4/5] object-cover bg-white border border-brand-lavender shadow-inner flex items-center justify-center rounded-3xl relative overflow-hidden group-hover:shadow-[0_0_30px_rgba(185,74,117,0.15)] transition-shadow duration-500">
                   <div className="absolute inset-0 bg-brand-blush/20"></div>
-                  {data.settings.aboutPageImage ? (
-                    <img src={data.settings.aboutPageImage} alt="Dr. Rakhi Goyal" className="absolute inset-0 w-full h-full object-cover z-0" />
+                  {settings.aboutPageImage ? (
+                    <img src={settings.aboutPageImage} alt="Dr. Rakhi Goyal" className="absolute inset-0 w-full h-full object-cover z-0" />
                   ) : (
                     <Stethoscope className="w-20 h-20 text-brand-plum/20 z-10" />
                   )}
@@ -177,16 +199,16 @@ export default function Home() {
               <span className="text-[10px] mono uppercase text-brand-rose mb-4 block tracking-[0.3em] font-semibold flex items-center">
                  <Sparkles className="w-3 h-3 mr-2" /> Meet The Specialist
               </span>
-              <h2 className="sub-display text-[40px] md:text-[60px] text-brand-plum mb-6 uppercase inline-block font-black leading-none drop-shadow-sm">{data.settings.doctorName || "Dr. Rakhi Goyal"}</h2>
+              <h2 className="sub-display text-[40px] md:text-[60px] text-brand-plum mb-6 uppercase inline-block font-black leading-none drop-shadow-sm">{settings.doctorName || "Dr. Rakhi Goyal"}</h2>
               <div className="flex flex-wrap gap-2 mb-8 mt-2">
-                 {(data.settings.doctorDegrees ? data.settings.doctorDegrees.split(',').map((s: string) => s.trim()) : ['MBBS', 'MD Obstetrics', 'FNB Reproductive', 'FICOG']).map((qual: string, i: number) => (
+                 {(settings.doctorDegrees ? settings.doctorDegrees.split(',').map((s: string) => s.trim()) : ['MBBS', 'MD Obstetrics', 'FNB Reproductive', 'FICOG']).map((qual: string, i: number) => (
                    <span key={i} className="px-4 py-2 bg-brand-ivory border border-brand-lavender/50 shadow-sm text-[10px] mono uppercase text-brand-plum font-bold rounded-full hover:bg-brand-blush transition-colors cursor-default">
                       {qual}
                    </span>
                  ))}
               </div>
               <p className="text-sm font-medium text-brand-plum/80 leading-relaxed mb-8 max-w-xl text-justify">
-                {data.settings.aboutText || "Compassionate and personalized reproductive healthcare with over 23 years of experience. We believe every journey is unique and deserves a tailored approach combining medical excellence with emotional support."}
+                {settings.aboutText || "Compassionate and personalized reproductive healthcare with over 23 years of experience. We believe every journey is unique and deserves a tailored approach combining medical excellence with emotional support."}
               </p>
               <Link to="/about" className="inline-flex items-center text-[10px] uppercase tracking-[0.3em] font-bold text-white bg-brand-plum hover:bg-brand-rose px-6 py-4 rounded-full transition-all duration-300 shadow-xl shadow-brand-plum/20 hover:-translate-y-1">
                 Explore Full Profile <ChevronRight className="w-4 h-4 ml-2" />
@@ -203,10 +225,10 @@ export default function Home() {
         </div>
         <div className="container mx-auto px-12 max-w-7xl relative z-10">
            <div className="mb-10">
-             <span className="text-[10px] mono uppercase text-brand-rose mb-4 block tracking-[0.3em] font-semibold flex items-center">
-                 <Shield className="w-3 h-3 mr-2" /> {data.settings.whyChooseUsTitle || "Why Choose Us"}
-             </span>
-             <h2 className="sub-display text-[40px] md:text-[60px] text-brand-plum uppercase max-w-2xl leading-[1.1]">{data.settings.whyChooseUsSubtitle || "Precision & Care"}</h2>
+              <span className="text-[10px] mono uppercase text-brand-rose mb-4 block tracking-[0.3em] font-semibold flex items-center">
+                  <Shield className="w-3 h-3 mr-2" /> {settings.whyChooseUsTitle || "Why Choose Us"}
+              </span>
+              <h2 className="sub-display text-[40px] md:text-[60px] text-brand-plum uppercase max-w-2xl leading-[1.1]">{settings.whyChooseUsSubtitle || "Precision & Care"}</h2>
            </div>
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {(() => {
@@ -218,7 +240,7 @@ export default function Home() {
                   { title: "Compassionate Counselling", desc: "Emotional and medical support throughout the entire fertility journey.", icon: <Heart className="w-6 h-6" /> },
                   { title: "Comprehensive Approach", desc: "Care covering female & male fertility, PCOS, hysteroscopy, laparoscopy, and more.", icon: <Shield className="w-6 h-6" /> }
                 ];
-                const customItems = data.settings.whyChooseUsItems || [];
+                const customItems = settings.whyChooseUsItems || [];
                 return defaultCards.map((defaultCard, i) => {
                   const customItem = customItems[i] || {};
                   return {
@@ -258,7 +280,7 @@ export default function Home() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-           {data.treatments?.slice(0, 3).map((treatment: any, i:number) => (
+           {data?.treatments?.slice(0, 3).map((treatment: any, i:number) => (
               <div key={treatment.id} className="bg-white/90 backdrop-blur-md rounded-[2.5rem] border border-brand-lavender p-6 lg:p-8 group cursor-pointer hover:border-brand-rose/40 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-rose/15 hover:-translate-y-2 flex flex-col relative overflow-hidden">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-tr from-transparent to-brand-peach/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-bl-[100%]"></div>
                  
@@ -316,7 +338,7 @@ export default function Home() {
         </div>
 
         <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar">
-          {data.testimonials?.filter((t: any) => t.status === 'published').length > 0 ? (
+          {data?.testimonials?.filter((t: any) => t.status === 'published')?.length > 0 ? (
             data.testimonials.filter((t: any) => t.status === 'published').map((testimonial: any) => (
               <div key={testimonial.id} className="min-w-[320px] md:min-w-[400px] max-w-[400px] snap-center bg-white/60 backdrop-blur-sm rounded-[2rem] p-8 border border-brand-lavender/50 hover:border-brand-rose/40 hover:shadow-2xl hover:shadow-brand-rose/10 transition-all duration-300">
                 <div className="flex items-center space-x-1 mb-6 text-brand-rose">
@@ -351,7 +373,7 @@ export default function Home() {
 
       {/* 7. Emotional Trust & Timeline */}
       <section className="bg-gradient-to-br from-brand-rose/90 to-brand-plum py-16 md:py-24 text-center border-y border-brand-lavender relative overflow-hidden my-12 md:my-16">
-        <div className="absolute inset-0 opacity-10 mix-blend-overlay" style={{ backgroundImage: `url(${data.settings.bgPatternUrl || 'https://www.transparenttextures.com/patterns/cubes.png'})`}}></div>
+        <div className="absolute inset-0 opacity-10 mix-blend-overlay" style={{ backgroundImage: `url(${settings.bgPatternUrl || 'https://www.transparenttextures.com/patterns/cubes.png'})`}}></div>
         <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-brand-peach/20 rounded-full blur-[100px] animation-float pointer-events-none"></div>
         <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-white/10 rounded-full blur-[80px] animation-float-delayed pointer-events-none"></div>
 
@@ -381,13 +403,13 @@ export default function Home() {
          <div className="mb-10 flex flex-col md:flex-row justify-between items-end border-b border-brand-lavender/50 pb-6">
             <div>
                <span className="text-[10px] mono uppercase text-brand-rose mb-4 block tracking-[0.3em] font-semibold flex items-center">
-                   <Baby className="w-3 h-3 mr-2" /> {data.settings.knowledgeBaseSubtitle || "Knowledge Base"}
+                   <Baby className="w-3 h-3 mr-2" /> {settings.knowledgeBaseSubtitle || "Knowledge Base"}
                </span>
-               <h2 className="sub-display text-[40px] md:text-[60px] text-brand-plum uppercase leading-[1.1]">{data.settings.knowledgeBaseTitle || "Fertility Guidance"}</h2>
+               <h2 className="sub-display text-[40px] md:text-[60px] text-brand-plum uppercase leading-[1.1]">{settings.knowledgeBaseTitle || "Fertility Guidance"}</h2>
             </div>
          </div>
          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {data.blogs?.slice(0,3).map((blog: any) => (
+            {data?.blogs?.slice(0,3).map((blog: any) => (
               <div key={blog.id} className="group cursor-pointer bg-white/60 backdrop-blur-sm rounded-[2rem] p-6 border border-brand-lavender hover:border-brand-rose/40 hover:shadow-2xl hover:shadow-brand-rose/10 transition-all duration-300 hover:-translate-y-2">
                 <div className="w-full aspect-square bg-gradient-to-tr from-brand-blush to-brand-ivory rounded-2xl border border-brand-lavender/50 mb-6 overflow-hidden flex items-center justify-center relative inner-shadow">
                   {blog.image ? (
