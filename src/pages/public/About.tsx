@@ -14,7 +14,7 @@ export default function About() {
            <div className="relative">
               <div className="w-full aspect-[4/5] object-cover bg-white border border-brand-lavender shadow-2xl flex items-center justify-center relative overflow-hidden rounded-[2rem]">
                   {data?.settings?.aboutPageImage ? (
-                    <img src={data.settings.aboutPageImage} alt={data.settings.doctorName || "Dr. Rakhi Goyal"} className="w-full h-full object-cover" />
+                    <img src={data.settings.aboutPageImage} alt={data?.settings?.doctorName || "Dr. Rakhi Goyal"} className="w-full h-full object-cover" />
                   ) : (
                     <Stethoscope className="w-24 h-24 text-brand-plum/20" />
                   )}
